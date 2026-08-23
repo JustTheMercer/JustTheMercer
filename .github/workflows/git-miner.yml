@@ -18,7 +18,7 @@ jobs:
           github_token: ${{ secrets.GH_PAT }}
           outputs: |
             dist/git-miner.svg
-            dist/git-miner-dark.svg?theme=github-dark
+            dist/git-miner-dark.svg?theme=github-dark&speed=slow&show_stats=true
 
       - name: Publish generated SVGs
         env:
