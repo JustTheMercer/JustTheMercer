@@ -23,7 +23,7 @@ jobs:
           github_user_name: ${{ github.repository_owner }}
           github_token: ${{ secrets.GH_PAT }}
 
-          speed: "1"
+          speed: "0.7"
 
           effects: high
 
