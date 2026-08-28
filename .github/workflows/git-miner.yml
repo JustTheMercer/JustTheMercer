@@ -5,20 +5,33 @@ on:
     - cron: "0 */12 * * *"
   workflow_dispatch:
 
+concurrency:
+  group: git-miner-${{ github.repository }}
+  cancel-in-progress: true
+
 jobs:
   generate:
     permissions:
       contents: write
+
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - uses: JustTheMercer/GitMiner@v1
         with:
-          github_user_name: JustTheMercer
+          github_user_name: ${{ github.repository_owner }}
           github_token: ${{ secrets.GH_PAT }}
+
+          speed: "1"
+
+          effects: high
+
+          show_stats: "true"
+
           outputs: |
             dist/git-miner.svg
-            dist/git-miner-dark.svg?theme=github-dark&speed=slow&show_stats=true
+            dist/git-miner-dark.svg?theme=github-dark
 
       - name: Publish generated SVGs
         env:
